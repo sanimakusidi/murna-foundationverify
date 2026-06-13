@@ -217,7 +217,7 @@ CREATE TABLE `transactions` (
   `type` enum('credit','debit') NOT NULL,
   `amount` decimal(15,2) NOT NULL,
   `reference` varchar(100) NOT NULL,
-  `method` enum('paystack','bank_transfer') NOT NULL,
+  `method` enum('paystack','bank_transfer','wallet') NOT NULL,
   `status` enum('pending','success','failed') DEFAULT 'pending',
   `description` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()

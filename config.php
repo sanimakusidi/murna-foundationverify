@@ -1,5 +1,6 @@
 <?php
 // config.php
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 // ─── Database Config ───────────────────────────────────────────────
 define('DB_HOST', getenv('MYSQL_HOST') ?: 'localhost');
