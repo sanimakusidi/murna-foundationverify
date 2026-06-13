@@ -1,0 +1,16 @@
+FROM dunglas/frankenphp:php8.4.22-bookworm
+
+# Install mysqli and pdo_mysql extensions
+RUN docker-php-ext-install mysqli pdo_mysql
+
+# Set working directory
+WORKDIR /app
+
+# Copy application source
+COPY . .
+
+# Install Composer dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Expose FrankenPHP default port
+EXPOSE 8080
