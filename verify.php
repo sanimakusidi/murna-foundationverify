@@ -115,15 +115,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['change_password'])) 
                 $first_name = trim($_POST['first_name'] ?? '');
                 $surname    = trim($_POST['surname']    ?? '');
                 $dob        = trim($_POST['dob']        ?? '');
-                if (empty($first_name) || empty($surname) || empty($dob)) {
+                $gender     = trim($_POST['gender']     ?? '');
+                if (empty($first_name) || empty($surname) || empty($dob) || empty($gender)) {
                     $error = 'Please fill in all required fields.';
                 } else {
                     $endpoint    = RANDAVERIFY_ENDPOINT_DEMO;
+                    $formatted_dob = date('d-m-Y', strtotime($dob));
                     $api_payload = [
                         'firstname' => $first_name,
                         'lastname'  => $surname,
-                        'dob'       => $dob,        // expected: YYYY-MM-DD
-                        'reason'    => $default_reason,
+                        'dob'       => $formatted_dob,
+                        'gender'    => $gender,
+                        'reason'    => 'nyscCheck',
                     ];
                     $query_input = json_encode(['name' => "$first_name $surname", 'dob' => $dob]);
                 }
@@ -754,7 +757,7 @@ $type_meta = [
             pointer-events: none;
         }
 
-        .input-wrap input {
+        .input-wrap input, .input-wrap select {
             width: 100%;
             padding: 14px 16px 14px 44px;
             background: rgba(255,255,255,0.04);
@@ -768,18 +771,29 @@ $type_meta = [
             letter-spacing: 0.3px;
         }
 
+        .input-wrap select {
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .input-wrap select option {
+            background: #002d62;
+            color: var(--white);
+        }
+
         .input-wrap input::placeholder {
             color: rgba(255,255,255,0.2);
         }
 
-        .input-wrap input:focus {
+        .input-wrap input:focus, .input-wrap select:focus {
             border-color: var(--green);
             background: rgba(0,166,81,0.04);
             box-shadow: 0 0 0 4px rgba(0,166,81,0.1);
         }
 
         .input-wrap input:focus + svg.input-icon,
-        .input-wrap svg.input-icon:has(+ input:focus) {
+        .input-wrap svg.input-icon:has(+ input:focus),
+        .input-wrap svg.input-icon:has(+ select:focus) {
             stroke: var(--green-light);
         }
 
@@ -1454,25 +1468,40 @@ $type_meta = [
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Date of Birth <span class="req">*</span></label>
-                        <div class="input-wrap" id="wrap-dob">
-                            <svg class="input-icon" viewBox="0 0 24 24">
-                                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
-                            </svg>
-                            <input
-                                type="date"
-                                name="dob"
-                                id="dob"
-                                max="<?= date('Y-m-d') ?>"
-                                value="<?= htmlspecialchars($_POST['dob'] ?? '') ?>"
-                                required
-                            >
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date of Birth <span class="req">*</span></label>
+                            <div class="input-wrap" id="wrap-dob">
+                                <svg class="input-icon" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                                </svg>
+                                <input
+                                    type="date"
+                                    name="dob"
+                                    id="dob"
+                                    max="<?= date('Y-m-d') ?>"
+                                    value="<?= htmlspecialchars($_POST['dob'] ?? '') ?>"
+                                    required
+                                >
+                            </div>
                         </div>
-                        <div class="input-hint">
-                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
-                            Enter the subject's date of birth exactly as registered with NIMC.
+                        <div class="form-group">
+                            <label>Gender <span class="req">*</span></label>
+                            <div class="input-wrap" id="wrap-gender">
+                                <svg class="input-icon" viewBox="0 0 24 24">
+                                    <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM12 14c-5.33 0-8 2.67-8 8h16c0-5.33-2.67-8-8-8z"/>
+                                </svg>
+                                <select name="gender" id="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="m" <?= (isset($_POST['gender']) && $_POST['gender'] === 'm') ? 'selected' : '' ?>>Male</option>
+                                    <option value="f" <?= (isset($_POST['gender']) && $_POST['gender'] === 'f') ? 'selected' : '' ?>>Female</option>
+                                </select>
+                            </div>
                         </div>
+                    </div>
+                    <div class="input-hint" style="margin-bottom: 22px; margin-top: -10px;">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+                        Enter the subject's date of birth and gender exactly as registered with NIMC.
                     </div>
                     <?php endif; ?>
 

@@ -19,16 +19,16 @@ define('PAYSTACK_CALLBACK_URL', APP_URL . '/payment_callback.php');
 
 // ─── RandaVerify API Config ────────────────────────────────────────
 // FIX #1: Removed the leading space that broke every cURL call
-define('RANDAVERIFY_BASE_URL', 'http://localhost:8000');
+define('RANDAVERIFY_BASE_URL', 'https://api.randaverify.com/v1');
 define('RANDAVERIFY_ADMIN_USER', 'aishaahmed');
 define('RANDAVERIFY_ADMIN_PASS', 'KSHgy_Uy0O-Gneqk');
 
 // ─── API Endpoints ─────────────────────────────────────────────────
-define('RANDAVERIFY_ENDPOINT_NIN',   '/api/nin/verify');
-define('RANDAVERIFY_ENDPOINT_PHONE', '/api/phone/verify');
-define('RANDAVERIFY_ENDPOINT_DEMO',  '/api/nin/demographics/verify');
-define('RANDAVERIFY_ENDPOINT_LOGIN', '/api/auth/login');
-define('RANDAVERIFY_ENDPOINT_CHPWD', '/api/auth/change-password');
+define('RANDAVERIFY_ENDPOINT_NIN',   '/verify-nin');
+define('RANDAVERIFY_ENDPOINT_PHONE', '/verify-nin/phone');
+define('RANDAVERIFY_ENDPOINT_DEMO',  '/verify-nin/demography');
+define('RANDAVERIFY_ENDPOINT_LOGIN', '/login');
+define('RANDAVERIFY_ENDPOINT_CHPWD', '/change-password');
 
 // ─── Verification Costs ────────────────────────────────────────────
 define('NIN_COST',         100.00);
@@ -193,10 +193,14 @@ function getRandaVerifyToken($forceRefresh = false) {
     $ch = _randaCurlBase(RANDAVERIFY_BASE_URL . RANDAVERIFY_ENDPOINT_LOGIN);
     curl_setopt_array($ch, [
         CURLOPT_POST       => true,
-        CURLOPT_POSTFIELDS => json_encode([
+        CURLOPT_POSTFIELDS => http_build_query([
             'username' => RANDAVERIFY_ADMIN_USER,
             'password' => $password,
         ]),
+        CURLOPT_HTTPHEADER => [
+            'Content-Type: application/x-www-form-urlencoded',
+            'Accept: application/json',
+        ],
     ]);
 
     $response = curl_exec($ch);
@@ -257,8 +261,8 @@ function changeRandaVerifyPassword($oldPassword, $newPassword, $tempToken) {
     curl_setopt_array($ch, [
         CURLOPT_POST       => true,
         CURLOPT_POSTFIELDS => json_encode([
-            'old_password' => $oldPassword,
-            'new_password' => $newPassword,
+            'current_password' => $oldPassword,
+            'new_password'     => $newPassword,
         ]),
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
