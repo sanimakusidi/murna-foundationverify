@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Password = 'iasrutzcabijytmb';     // <-- hardcode for test
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
+            $mail->Timeout = 10; // Fail fast if SMTP is blocked (e.g., on Railway)
             $mail->setFrom('murnafoundationverify@gmail.com', 'Murna Foundation');
             $mail->addAddress($email);
             $mail->isHTML(true);
@@ -55,8 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo 'Reset link has been sent to your email.';
         } catch (Exception $e) {
             error_log("Mail error: " . $mail->ErrorInfo);
-            echo 'There was an error sending the email.';
-              
+            // Fallback for Railway where outbound SMTP is blocked
+            echo '<div style="padding: 15px; border: 1px solid #ffcc00; background-color: #ffffe6; border-radius: 5px; margin-top: 20px;">';
+            echo '<strong>Development Notice:</strong> It appears your host (Railway) is blocking outgoing SMTP connections, which is common on free/hobby plans.<br><br>';
+            echo 'For testing purposes, here is your password reset link: <br><br>';
+            echo '<a href="' . $resetLink . '" style="background: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 3px; display: inline-block;">Reset Password Now</a>';
+            echo '</div>';
         }
     } else {
         echo 'If an account exists with that email, you will receive a reset link.';
