@@ -11,7 +11,8 @@ define('DB_PORT', getenv('MYSQL_PORT') ?: 3306);
 
 // ─── App Config ────────────────────────────────────────────────────
 define('APP_NAME', 'Murna Foundation NIN Portal');
-define('APP_URL', 'http://localhost/murna-foundation');
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+define('APP_URL', getenv('APP_URL') ?: $protocol . $_SERVER['HTTP_HOST']);
 
 // ─── Paystack Config ───────────────────────────────────────────────
 define('PAYSTACK_PUBLIC_KEY', 'pk_test_3df7192d5ed9da1bda6185029d1daed8210d68c3');

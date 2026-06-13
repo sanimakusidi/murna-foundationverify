@@ -1,7 +1,8 @@
 <?php
 session_start();
 define('ADMIN_PATH', dirname(__DIR__));
-define('ADMIN_URL', 'http://localhost/murna-foundation/admin');
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+define('ADMIN_URL', getenv('ADMIN_URL') ?: $protocol . $_SERVER['HTTP_HOST'] . '/admin');
 
 // Database configuration
 define('DB_HOST', getenv('MYSQL_HOST') ?: 'localhost');
