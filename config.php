@@ -2,10 +2,11 @@
 // config.php
 
 // ─── Database Config ───────────────────────────────────────────────
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'murna_foundation');
+define('DB_HOST', getenv('MYSQL_HOST') ?: 'localhost');
+define('DB_USER', getenv('MYSQL_USER') ?: 'root');
+define('DB_PASS', getenv('MYSQL_PASSWORD') ?: '');
+define('DB_NAME', getenv('MYSQL_DATABASE') ?: 'murna_foundation');
+define('DB_PORT', getenv('MYSQL_PORT') ?: 3306);
 
 // ─── App Config ────────────────────────────────────────────────────
 define('APP_NAME', 'Murna Foundation NIN Portal');
@@ -39,7 +40,7 @@ function getDB() {
     static $conn = null;
     // Reuse connection within the same request (prevents "too many connections")
     if ($conn === null || $conn->connect_error) {
-        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
         if ($conn->connect_error) {
             die(json_encode(['error' => 'Database connection failed: ' . $conn->connect_error]));
         }
