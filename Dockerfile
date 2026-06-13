@@ -20,4 +20,4 @@ RUN composer install --no-dev --optimize-autoloader
 # Expose FrankenPHP default port
 EXPOSE 8080
 
-CMD ["frankenphp", "run", "--config", "/app/Caddyfile", "--worker", "/app/index.php"]
+CMD ["frankenphp", "run", "--config", "/app/Caddyfile"]
