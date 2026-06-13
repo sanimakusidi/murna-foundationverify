@@ -4,6 +4,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'config.php'; // Assume $conn is a MySQLi connection
 
+set_time_limit(120); // Increase execution time limit
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
 
@@ -36,13 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->SMTPAuth = true;
             $mail->Username = 'murnafoundationverify@gmail.com';  // <-- hardcode for test
             $mail->Password = 'iasrutzcabijytmb';     // <-- hardcode for test
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-           $mail->setFrom('murnafoundationverify@gmail.com', 'Test');
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
+            $mail->setFrom('murnafoundationverify@gmail.com', 'Murna Foundation');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Request';
-            $mail->Body = 'Click this link to reset your password: <a href="https://877e-102-91-103-174.ngrok-free.app/murna-foundation/reset_password.php?token=' . $token . '">Reset Password</a>';
+            
+            // Generate the dynamic reset link using the current host
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+            $host = $_SERVER['HTTP_HOST'];
+            $resetLink = $protocol . $host . '/reset_password.php?token=' . $token;
+            
+            $mail->Body = 'Click this link to reset your password: <a href="' . $resetLink . '">Reset Password</a>';
             $mail->send();
             echo 'Reset link has been sent to your email.';
         } catch (Exception $e) {
