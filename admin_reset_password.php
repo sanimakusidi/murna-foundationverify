@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $new_password = 'Murna_foundation@555';
 $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
 
-UPDATE admin_users SET password = ? WHERE username = 'admin' AND password = 'password';
+UPDATE admin_users SET password = ? WHERE username = 'admin';
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $hashed_password);
 
