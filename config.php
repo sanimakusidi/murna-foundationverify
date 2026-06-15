@@ -15,8 +15,8 @@ $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' 
 define('APP_URL', getenv('APP_URL') ?: $protocol . $_SERVER['HTTP_HOST']);
 
 // ─── Paystack Config ───────────────────────────────────────────────
-define('PAYSTACK_PUBLIC_KEY', 'pk_test_3df7192d5ed9da1bda6185029d1daed8210d68c3');
-define('PAYSTACK_SECRET_KEY', 'sk_test_266c40da7ed089920b366aab58f1ef8ec0d7e53f');
+define('PAYSTACK_PUBLIC_KEY', 'pk_test_0a76cbe55fb0fccbc4124da3100e7e3425331fc2');
+define('PAYSTACK_SECRET_KEY', 'sk_test_b5587f0e70f6d4575cb66dfdcd03df2a7ca8c7d0');
 define('PAYSTACK_CALLBACK_URL', APP_URL . '/payment_callback.php');
 
 // ─── RandaVerify API Config ────────────────────────────────────────
