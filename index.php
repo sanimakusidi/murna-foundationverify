@@ -153,6 +153,7 @@ $nigerian_states = [
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
+             --banner-height: auto;
             --green: #00A651;
             --green-light: #00C960;
             --green-dark: #007A3D;
@@ -171,15 +172,14 @@ $nigerian_states = [
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--black);
-            min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
-            color: var(--text);
-        }
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: var(--text);
+}
 
         /* ── Left Panel ── */
         .auth-left {
@@ -517,219 +517,315 @@ $nigerian_states = [
             .auth-right { padding: 28px 20px; }
             .form-row { grid-template-columns: 1fr; }
         }
+        /* ── Page Wrapper ── */
+/* Page wrapper – vertical stack */
+#page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Banner – takes most of the viewport */
+#banner {
+    position: relative;
+    width: 100%;
+     height: var(--banner-height);         /* adjust height as desired */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+#banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#banner .banner-overlay {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.4);
+    padding: 20px 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    max-width: 600px;
+}
+
+#banner .banner-overlay h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+}
+
+#banner .banner-overlay p {
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Container for the two panels – horizontal flex */
+#auth-container {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;        /* takes remaining height */
+    min-height: 0;         /* prevent overflow */
+    width: 100%;
+}
+
+/* Left panel – keep original width 42% */
+.auth-left {
+    width: 42%;
+    background: linear-gradient(145deg, var(--blue) 0%, #001a3d 60%, #000c1f 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 48px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Right panel – takes remaining space */
+.auth-right {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 32px;
+    overflow-y: auto;
+    background: var(--black-soft);
+    min-height: 0; /* allows scrolling if content overflows */
+}
+
     </style>
 </head>
 <body>
 
-<!-- LEFT PANEL -->
-<div class="auth-left">
-    <div class="brand">
-        <div class="brand-logo">
-                            <img 
-                src="murna.jpg" 
-                alt="Murna Logo"
-                style="
-                    width:120px;
-                    height:120px;
-                    object-fit:cover;
-                    border-radius:20px;
-                    padding:9px;
-                    background:#fff;
-                    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-                    border:8px solid #00A651;
-                "
-                >
-            
-            <div class="brand-name">
-                Murna Foundation
-                <span>NIN Verification Portal, Partner to Randa Frames, Licensed by NDPC</span>
+  <div id="page-wrapper">
+        <div id="banner">
+            <img src="ndpact.jpg" alt="NDP Act 2023 Audit" />
+            <div class="banner-overlay">
+                <h2>NDP Act 2023 Compliant</h2>
+                <p>Official NIN Verification Portal</p>
             </div>
         </div>
-        <div class="brand-hero">
-            <h1>Verify Identity with <em>Confidence</em></h1>
-            <p>Access and verify persons with National Identity Management Commission securely. Verify individuals by NIN, phone number, or demographic data.</p>
-        </div>
-    </div>
-    <div class="features">
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-            </div>
-            <div class="feature-text">Secure &amp; Encrypted Verification</div>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <div class="feature-text">Real-time NIN Database Access</div>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
-            </div>
-            <div class="feature-text">Individual &amp; Corporate Accounts</div>
-        </div>
-    </div>
-</div>
 
-<!-- RIGHT PANEL -->
-<div class="auth-right">
-    <div class="auth-box">
-
-        <!-- Tabs: Login / Register -->
-        <div class="auth-tabs">
-            <a href="?page=login" class="auth-tab <?= $page === 'login' ? 'active' : '' ?>">Sign In</a>
-            <a href="?page=register" class="auth-tab <?= $page === 'register' ? 'active' : '' ?>">Create Account</a>
-        </div>
-
-        <?php if ($error): ?>
-            <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
-        <?php if ($success): ?>
-            <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
-        <?php endif; ?>
-
-        <!-- ─── LOGIN FORM ──────────────────────────────────────── -->
-        <?php if ($page === 'login'): ?>
-        <div class="auth-heading">Welcome Back</div>
-        <div class="auth-subheading">Sign in to your Murna Foundation account</div>
-
-        <form method="POST">
-            <input type="hidden" name="action" value="login">
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="btn-primary">Sign In to Portal</button>
-
-        </form>
-         <div class="divider">Don't have an account?</div>
-        <a href="?page=register" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Create Account &rarr;</a>
-
-<div class="divider">Can't access your account?</div>
-<a href="forgot_password.php" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Forgot Password? &rarr;</a>
-       
-        <!-- ─── REGISTER FORM ───────────────────────────────────── -->
-        <?php elseif ($page === 'register'): ?>
-        <div class="auth-heading">Create Account</div>
-        <div class="auth-subheading">Select your account type to get started</div>
-
-        <div class="reg-type-tabs">
-            <button class="reg-type-btn active" id="btn-individual" onclick="switchRegType('individual')">
-                Individual
-                <span class="btn-label">Personal account</span>
-            </button>
-            <button class="reg-type-btn" id="btn-corporate" onclick="switchRegType('corporate')">
-                Corporate Body
-                <span class="btn-label">Organisation account</span>
-            </button>
-        </div>
-
-        <!-- Individual Form -->
-        <div id="form-individual">
-            <form method="POST">
-                <input type="hidden" name="action" value="register_individual">
-                <div class="form-group">
-                    <label>Full Name <span style="color:var(--green)">*</span></label>
-                    <input type="text" name="full_name" placeholder="e.g. Amina Mohammed" required>
+        <div id="auth-container">
+        <div class="auth-left">
+            <div class="brand">
+                <div class="brand-logo">
+                                    <img 
+                        src="murna.jpg" 
+                        alt="Murna Logo"
+                        style="
+                            width:120px;
+                            height:120px;
+                            object-fit:cover;
+                            border-radius:20px;
+                            padding:9px;
+                            background:#fff;
+                            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+                            border:8px solid #00A651;
+                        "
+                        >
+                    
+                    <div class="brand-name">
+                        Murna Foundation
+                        <span>NIN Verification Portal, Partner to Randa Frames, Licensed by NDPC</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                        <label>Email Address <span style="color:var(--green)">*</span></label>
+                <div class="brand-hero">
+                    <h1>Verify Identity with <em>Confidence</em></h1>
+                    <p>Access and verify persons with National Identity Management Commission securely. Verify individuals by NIN, phone number, or demographic data.</p>
+                </div>
+            </div>
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <div class="feature-text">Secure &amp; Encrypted Verification</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div class="feature-text">Real-time NIN Database Access</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+                    </div>
+                    <div class="feature-text">Individual &amp; Corporate Accounts</div>
+                </div>
+            </div>
+        </div>
+
+  
+
+        <!-- RIGHT PANEL -->
+        <div class="auth-right">
+            <div class="auth-box">
+
+                <!-- Tabs: Login / Register -->
+                <div class="auth-tabs">
+                    <a href="?page=login" class="auth-tab <?= $page === 'login' ? 'active' : '' ?>">Sign In</a>
+                    <a href="?page=register" class="auth-tab <?= $page === 'register' ? 'active' : '' ?>">Create Account</a>
+                </div>
+
+                <?php if ($error): ?>
+                    <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
+                <?php if ($success): ?>
+                    <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+                <?php endif; ?>
+
+                <!-- ─── LOGIN FORM ──────────────────────────────────────── -->
+                <?php if ($page === 'login'): ?>
+                <div class="auth-heading">Welcome Back</div>
+                <div class="auth-subheading">Sign in to your Murna Foundation account</div>
+
+                <form method="POST">
+                    <input type="hidden" name="action" value="login">
+                    <div class="form-group">
+                        <label>Email Address</label>
                         <input type="email" name="email" placeholder="you@example.com" required>
                     </div>
-                
-                <div class="form-row">
-                     <div class="form-group">
-                    <label>NIN <span style="color:var(--green)">*</span></label>
-                    <input type="text" name="nin_input" placeholder="e.g. 11 digit NIN" required minlength="11" maxlength="11">
-                </div>
                     <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" name="phone" placeholder="080XXXXXXXX">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Enter your password" required>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Password <span style="color:var(--green)">*</span></label>
-                        <input type="password" name="password" placeholder="Min. 8 characters" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm Password <span style="color:var(--green)">*</span></label>
-                        <input type="password" name="confirm_password" placeholder="Repeat password" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-primary">Create Individual Account</button>
-            </form>
-        </div>
+                    <button type="submit" class="btn-primary">Sign In to Portal</button>
 
-        <!-- Corporate Form -->
-        <div id="form-corporate" class="hidden">
-            <form method="POST">
-                <input type="hidden" name="action" value="register_corporate">
-                <div class="form-group">
-                    <label>Organisation Name <span style="color:var(--green)">*</span></label>
-                    <input type="text" name="org_name" placeholder="e.g. Murna Foundation Ltd" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>RC Number</label>
-                        <input type="text" name="rc_number" placeholder="CAC RC Number">
-                    </div>
-                    <div class="form-group">
-                        <label>State of Registration</label>
-                        <select name="org_state">
-                            <option value="">-- Select State --</option>
-                            <?php foreach ($nigerian_states as $state): ?>
-                                <option value="<?= $state ?>"><?= $state ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Organisation Address</label>
-                    <textarea name="org_address" placeholder="Full registered address"></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Contact Person <span style="color:var(--green)">*</span></label>
-                        <input type="text" name="contact_person" placeholder="Authorised signatory" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Contact Phone</label>
-                        <input type="tel" name="contact_phone" placeholder="080XXXXXXXX">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email Address <span style="color:var(--green)">*</span></label>
-                        <input type="email" name="email" placeholder="org@example.com" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Password <span style="color:var(--green)">*</span></label>
-                        <input type="password" name="password" placeholder="Min. 8 characters" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm Password <span style="color:var(--green)">*</span></label>
-                        <input type="password" name="confirm_password" placeholder="Repeat password" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-primary">Create Corporate Account</button>
-            </form>
-        </div>
+                </form>
+                <div class="divider">Don't have an account?</div>
+                <a href="?page=register" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Create Account &rarr;</a>
 
-        <div class="divider">Already have an account?</div>
-        <a href="?page=login" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Sign In &rarr;</a>
-        <?php endif; ?>
+        <div class="divider">Can't access your account?</div>
+        <a href="forgot_password.php" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Forgot Password? &rarr;</a>
+            
+                <!-- ─── REGISTER FORM ───────────────────────────────────── -->
+                <?php elseif ($page === 'register'): ?>
+                <div class="auth-heading">Create Account</div>
+                <div class="auth-subheading">Select your account type to get started</div>
 
-    </div>
+                <div class="reg-type-tabs">
+                    <button class="reg-type-btn active" id="btn-individual" onclick="switchRegType('individual')">
+                        Individual
+                        <span class="btn-label">Personal account</span>
+                    </button>
+                    <button class="reg-type-btn" id="btn-corporate" onclick="switchRegType('corporate')">
+                        Corporate Body
+                        <span class="btn-label">Organisation account</span>
+                    </button>
+                </div>
+
+                <!-- Individual Form -->
+                <div id="form-individual">
+                    <form method="POST">
+                        <input type="hidden" name="action" value="register_individual">
+                        <div class="form-group">
+                            <label>Full Name <span style="color:var(--green)">*</span></label>
+                            <input type="text" name="full_name" placeholder="e.g. Amina Mohammed" required>
+                        </div>
+                        <div class="form-group">
+                                <label>Email Address <span style="color:var(--green)">*</span></label>
+                                <input type="email" name="email" placeholder="you@example.com" required>
+                            </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                            <label>NIN <span style="color:var(--green)">*</span></label>
+                            <input type="text" name="nin_input" placeholder="e.g. 11 digit NIN" required minlength="11" maxlength="11">
+                        </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" name="phone" placeholder="080XXXXXXXX">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Password <span style="color:var(--green)">*</span></label>
+                                <input type="password" name="password" placeholder="Min. 8 characters" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password <span style="color:var(--green)">*</span></label>
+                                <input type="password" name="confirm_password" placeholder="Repeat password" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Create Individual Account</button>
+                    </form>
+                </div>
+
+                <!-- Corporate Form -->
+                <div id="form-corporate" class="hidden">
+                    <form method="POST">
+                        <input type="hidden" name="action" value="register_corporate">
+                        <div class="form-group">
+                            <label>Organisation Name <span style="color:var(--green)">*</span></label>
+                            <input type="text" name="org_name" placeholder="e.g. Murna Foundation Ltd" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>RC Number</label>
+                                <input type="text" name="rc_number" placeholder="CAC RC Number">
+                            </div>
+                            <div class="form-group">
+                                <label>State of Registration</label>
+                                <select name="org_state">
+                                    <option value="">-- Select State --</option>
+                                    <?php foreach ($nigerian_states as $state): ?>
+                                        <option value="<?= $state ?>"><?= $state ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Organisation Address</label>
+                            <textarea name="org_address" placeholder="Full registered address"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Contact Person <span style="color:var(--green)">*</span></label>
+                                <input type="text" name="contact_person" placeholder="Authorised signatory" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Phone</label>
+                                <input type="tel" name="contact_phone" placeholder="080XXXXXXXX">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address <span style="color:var(--green)">*</span></label>
+                                <input type="email" name="email" placeholder="org@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Password <span style="color:var(--green)">*</span></label>
+                                <input type="password" name="password" placeholder="Min. 8 characters" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password <span style="color:var(--green)">*</span></label>
+                                <input type="password" name="confirm_password" placeholder="Repeat password" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Create Corporate Account</button>
+                    </form>
+                </div>
+
+                <div class="divider">Already have an account?</div>
+                <a href="?page=login" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Sign In &rarr;</a>
+                <?php endif; ?>
 </div>
-
+            </div>
+        </div>
+</div>
 <script>
 function switchRegType(type) {
     document.getElementById('form-individual').classList.toggle('hidden', type !== 'individual');
