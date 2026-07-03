@@ -15,15 +15,15 @@ $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' 
 define('APP_URL', getenv('APP_URL') ?: $protocol . $_SERVER['HTTP_HOST']);
 
 // ─── Paystack Config ───────────────────────────────────────────────
-define('PAYSTACK_PUBLIC_KEY', 'pk_live_d5b96c21b2c3decdf5630023fab25f87f4712496');
+define('PAYSTACK_PUBLIC_KEY', '');
 //define('PAYSTACK_SECRET_KEY', '');
 define('PAYSTACK_CALLBACK_URL', APP_URL . '/payment_callback.php');
 
 // ─── RandaVerify API Config ────────────────────────────────────────
 // FIX #1: Removed the leading space that broke every cURL call
 define('RANDAVERIFY_BASE_URL', 'https://api.randaverify.com/v1');
-define('RANDAVERIFY_ADMIN_USER', 'aishaahmed');
-define('RANDAVERIFY_ADMIN_PASS', 'KSHgy_Uy0O-Gneqk');
+define('RANDAVERIFY_ADMIN_USER', '');
+define('RANDAVERIFY_ADMIN_PASS', '');
 
 // ─── API Endpoints ─────────────────────────────────────────────────
 define('RANDAVERIFY_ENDPOINT_NIN',   '/verify-nin');
