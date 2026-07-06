@@ -199,7 +199,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['change_password'])) 
                     }
                 } else {
                     // Surface the API's own error message
-                    $error = $api_response['detail'] ?? 'Verification failed — no matching record found.';
+                    $api_detail = $api_response['detail'] ?? $api_response['message'] ?? 'Verification failed — no matching record found.';
+                    $error = is_array($api_detail) ? json_encode($api_detail) : $api_detail;
                 }
 
                 // ── Log every attempt ─────────────────────────────────────
@@ -1344,7 +1345,7 @@ $type_meta = [
         <?php if (!empty($error)): ?>
         <div class="alert alert-error">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
-            <?= htmlspecialchars($error) ?>
+            <?= htmlspecialchars(is_array($error) ? json_encode($error) : $error) ?>
         </div>
         <?php endif; ?>
 
@@ -1671,7 +1672,7 @@ if (isset($show_password_change_form) && $show_password_change_form === true):
         </div>
         <div class="verify-form-body">
             <?php if (!empty($error)): ?>
-                <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
+                <div class="alert alert-error"><?= htmlspecialchars(is_array($error) ? json_encode($error) : $error) ?></div>
             <?php endif; ?>
             <form method="POST" action="">
                 <input type="hidden" name="change_password" value="1">
