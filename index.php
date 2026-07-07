@@ -674,6 +674,21 @@ $nigerian_states = [
                         <input type="password" name="confirm_password" placeholder="Repeat password" required>
                     </div>
                 </div>
+
+<div class="form-group" style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 8px; border-left: 4px solid var(--green);">
+        <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" name="consent_disclaimer" value="1" required style="margin-top: 0.2rem; flex-shrink: 0;">
+            <span style="font-weight: 400; font-size: 0.95rem; line-height: 1.5; color: #333;">
+                I confirm that the information provided is true and accurate to the best of my knowledge. 
+                <strong>I understand that providing false information will result in immediate account deactivation.</strong> 
+                I also acknowledge that I am solely liable for any damages, penalties, or legal actions that may arise from 
+                <strong>non-compliance with the Nigeria Data Protection Act (NDPA)</strong> and other applicable security 
+                and privacy laws while using this service.
+                <span style="color: var(--green);">*</span>
+            </span>
+        </label>
+    </div>
+                
                 <button type="submit" class="btn-primary">Create Individual Account</button>
             </form>
         </div>
@@ -731,6 +746,20 @@ $nigerian_states = [
                         <input type="password" name="confirm_password" placeholder="Repeat password" required>
                     </div>
                 </div>
+<div class="form-group" style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 8px; border-left: 4px solid var(--green);">
+        <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" name="consent_disclaimer" value="1" required style="margin-top: 0.2rem; flex-shrink: 0;">
+            <span style="font-weight: 400; font-size: 0.95rem; line-height: 1.5; color: #333;">
+                I confirm that the information provided is true and accurate to the best of my knowledge. 
+                <strong>I understand that providing false information will result in immediate account deactivation.</strong> 
+                I also acknowledge that I am solely liable for any damages, penalties, or legal actions that may arise from 
+                <strong>non-compliance with the Nigeria Data Protection Act (NDPA)</strong> and other applicable security 
+                and privacy laws while using this service.
+                <span style="color: var(--green);">*</span>
+            </span>
+        </label>
+    </div>
+                
                 <button type="submit" class="btn-primary">Create Corporate Account</button>
             </form>
         </div>
