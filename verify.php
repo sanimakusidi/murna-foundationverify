@@ -1253,7 +1253,7 @@ $type_meta = [
             </div>
         </a>
 
-        <!-- Phone Card -->
+        <?php /* ?><!-- Phone Card 
         <a href="verify.php?type=phone" class="type-card <?= $balance < $costs['phone'] ? 'disabled' : '' ?>">
             <div class="type-card-icon">
                 <svg viewBox="0 0 24 24">
@@ -1270,7 +1270,7 @@ $type_meta = [
             </div>
         </a>
 
-        <!-- Demographic Card -->
+         Demographic Card 
         <a href="verify.php?type=demographic" class="type-card <?= $balance < $costs['demographic'] ? 'disabled' : '' ?>">
             <div class="type-card-icon">
                 <svg viewBox="0 0 24 24">
@@ -1287,7 +1287,7 @@ $type_meta = [
             </div>
         </a>
 
-    </div>
+    </div> --><?php */ ?>
 
     <?php if ($balance < $costs['nin']): ?>
         <div style="margin-top:24px; font-size:14px; color:var(--red); display:flex; align-items:center; gap:8px;">
