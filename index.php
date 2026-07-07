@@ -674,6 +674,7 @@ $nigerian_states = [
                         <input type="password" name="confirm_password" placeholder="Repeat password" required>
                     </div>
                 </div>
+                   <div class="form-group">
         <input type="checkbox" name="consent_disclaimer" value="1" required style="margin-top: 0.2rem; flex-shrink: 0;">
         <span style="font-weight: 400; font-size: 0.95rem; line-height: 1.5; color: #ffffff;">
             I confirm that the information provided is true and accurate to the best of my knowledge. 
@@ -742,6 +743,7 @@ $nigerian_states = [
                         <input type="password" name="confirm_password" placeholder="Repeat password" required>
                     </div>
                 </div>
+                   <div class="form-group">
   <input type="checkbox" name="consent_disclaimer" value="1" required style="margin-top: 0.2rem; flex-shrink: 0;">
         <span style="font-weight: 400; font-size: 0.95rem; line-height: 1.5; color: #ffffff;">
             I confirm that the information provided is true and accurate to the best of my knowledge. 
@@ -751,6 +753,7 @@ $nigerian_states = [
             and privacy laws while using this service.
             <span style="color: var(--green);">*</span>
         </span>
+                       </div> 
                 
                 <button type="submit" class="btn-primary">Create Corporate Account</button>
             </form>
