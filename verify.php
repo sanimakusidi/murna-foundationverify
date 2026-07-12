@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['change_password'])) 
                 } else {
                     $endpoint    = RANDAVERIFY_ENDPOINT_PHONE;
                     // API accepts the number in local format (0XXXXXXXXXX)
-                    $api_payload = ['phone' => $clean_phone, 'reason' => $default_reason];
+                    $api_payload = ['phone_no' => $clean_phone, 'reason' => $default_reason];
                     $query_input = $clean_phone;
                 }
                 break;
