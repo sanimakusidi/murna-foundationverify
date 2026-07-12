@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['change_password'])) 
 
             // ── Phone ─────────────────────────────────────────────
             case 'phone':
-                $phone       = trim($_POST['phone_number'] ?? '');
+                $phone = trim($_POST['phone_number'] ?? '');
                 $clean_phone = preg_replace('/^\+234/', '0', $phone);
                 if (!preg_match('/^0[7-9][0-1]\d{8}$/', $clean_phone)) {
                     $error = 'Enter a valid Nigerian phone number (e.g. 08012345678).';
@@ -1253,7 +1253,7 @@ $type_meta = [
             </div>
         </a>
 
-        <?php /* ?><!-- Phone Card 
+        
         <a href="verify.php?type=phone" class="type-card <?= $balance < $costs['phone'] ? 'disabled' : '' ?>">
             <div class="type-card-icon">
                 <svg viewBox="0 0 24 24">
@@ -1269,7 +1269,7 @@ $type_meta = [
                 <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
             </div>
         </a>
-
+<?php /* ?><!-- Phone Card 
          Demographic Card 
         <a href="verify.php?type=demographic" class="type-card <?= $balance < $costs['demographic'] ? 'disabled' : '' ?>">
             <div class="type-card-icon">
