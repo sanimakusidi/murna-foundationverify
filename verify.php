@@ -122,9 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['change_password'])) 
                     $endpoint    = RANDAVERIFY_ENDPOINT_DEMO;
                     $formatted_dob = date('d-m-Y', strtotime($dob));
                     $api_payload = [
-                        'firstname' => $first_name,
-                        'lastname'  => $surname,
-                        'dob'       => $formatted_dob,
+                        'first_name' => $first_name,
+                        'last_name'  => $surname,
+                        'date_of_birth'       => $formatted_dob,
                         'gender'    => $gender,
                         'reason'    => 'nyscCheck',
                     ];
