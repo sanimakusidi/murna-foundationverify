@@ -1,3 +1,8 @@
+# Redirect apex domain to www subdomain (301 permanent)
+murnafoundationverify.org {
+    redir https://www.murnafoundationverify.org{uri} 301
+}
+
 :8080 {
     root * /app
     encode zstd gzip
