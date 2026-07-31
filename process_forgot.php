@@ -59,9 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Fallback for Railway where outbound SMTP is blocked
             echo '<div style="padding: 15px; border: 1px solid #ffcc00; background-color: #ffffe6; border-radius: 5px; margin-top: 20px;">';
             echo '<strong>Development Notice:</strong> It appears your host (Railway) is blocking outgoing SMTP connections, which is common on free/hobby plans.<br><br>';
-            echo 'For testing purposes, here is your password reset link: <br><br>';
-            echo '<a href="' . $resetLink . '" style="background: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 3px; display: inline-block;">Reset Password Now</a>';
-            echo '</div>';
+          echo '</div>';
         }
     } else {
         echo 'If an account exists with that email, you will receive a reset link.';
