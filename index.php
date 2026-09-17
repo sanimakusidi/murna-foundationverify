@@ -764,7 +764,9 @@ $nigerian_states = [
         <?php endif; ?>
         <div class="auth-footer">
             <img src="ndpact.jpg" alt="NDP Act 2023 Audit" />
+            
         </div>
+        <div>contact us @ digitaldividesolutions01@gmail.com</div>
     </div>
 </div>
 
