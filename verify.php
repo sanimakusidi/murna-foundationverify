@@ -1642,9 +1642,10 @@ $fields = [
                     <a href="download_nin_pdf.php?format=verification" class="btn-new-verify">💳 Improved NIN Slip</a>
                     <a href="download_nin_pdf.php?format=premium" class="btn-new-verify">📄 Verification Page</a>
                     <a href="download_nin_pdf.php?format=card" class="btn-new-verify"> Regular NIN slip</a>
-                     <a href="download_personal_slip.php" class="btn-new-verify">📄 Personal Info Slip (PDF)</a>
-        <a href="download_premium_slip.php" class="btn-new-verify">⭐ Premium NIN Slip (PDF)</a>
-      
+                    <!--
+                                <a href="download_personal_slip.php" class="btn-new-verify">📄 Personal Info Slip (PDF)</a>
+                                <a href="download_premium_slip.php" class="btn-new-verify">⭐ Premium NIN Slip (PDF)</a>
+                      -->
                     <a href="verify.php" class="btn-new-verify">🔄 New Verification</a>
                 </div>
             </div>
