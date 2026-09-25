@@ -762,10 +762,7 @@ $nigerian_states = [
         <div class="divider">Already have an account?</div>
         <a href="?page=login" style="display:block; text-align:center; color:var(--green-light); font-weight:600; font-size:15px; text-decoration:none;">Sign In &rarr;</a>
         <?php endif; ?>
-        <div class="auth-footer">
-            <img src="ndpact.jpg" alt="NDP Act 2023 Audit" />
-            
-        </div>
+       
         <div>contact us @ digitaldividesolutions01@gmail.com</div>
     </div>
 </div>
