@@ -554,7 +554,7 @@ $nigerian_states = [
             
             <div class="brand-name">
                 Murna Foundation
-                <span>NIN Verification Portal, Partner to Randa Frames, Licensed by NDPC</span>
+                <span>NIN Verification Portal, Partner to Randa Frames</span>
             </div>
         </div>
         <div class="brand-hero">
